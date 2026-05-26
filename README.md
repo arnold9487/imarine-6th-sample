@@ -8,7 +8,7 @@
 
 ## 線上展示
 
-可直接從 GitHub Pages 開啟（連結待補）。若伺服器渲染有問題，請見下方「本機執行」。
+可直接從 GitHub Pages 開啟 [附上連結](https://arnold9487.github.io/-IMARINE_-/)。若伺服器渲染有問題，請見下方「本機執行」。
 
 ---
 
