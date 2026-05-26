@@ -1,0 +1,8 @@
+# 重建 data/ 與分析圖需要的套件（純前端執行不需要）
+# 安裝：pip install -r requirements.txt
+# 此外 build_zones.py 需瀏覽器引擎：playwright install chromium
+
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.6
+playwright>=1.30

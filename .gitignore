@@ -1,0 +1,17 @@
+# Python 環境
+.venv/
+__pycache__/
+*.pyc
+
+# 編輯器
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Playwright 暫存
+playwright/
+
+# 暫存
+_*.png
+*.tmp

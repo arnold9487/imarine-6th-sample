@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高雄港 貨櫃中心壓力狀態</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<!-- 全螢幕可拖曳縮放地圖（已 clamp 在圖片邊界） -->
+<div id="map-host" aria-label="高雄港地圖"></div>
+
+<!-- 左上：標題 -->
+<div class="hud hud-tl">
+  <div class="title">
+    <h1>高雄港 · 貨櫃中心壓力</h1>
+    <p class="sub">2025 全年 · 在泊壓力動態視覺化</p>
+  </div>
+</div>
+
+<!-- 左側：資訊條（可摺疊、可滾動） -->
+<div id="info-panel" class="info-panel" aria-label="壓力指數資訊">
+  <div class="info-head">
+    <div class="info-title">壓力指數</div>
+    <div class="info-controls">
+      <label class="info-scale">
+        <span>尺度</span>
+        <select id="trend-scale" title="尺度">
+          <option value="time" selected>時間</option>
+          <option value="day">日期</option>
+          <option value="month">月份</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <button id="info-toggle" class="info-toggle" aria-expanded="true" title="摺疊">❮</button>
+  <div class="info-body">
+    <div class="chart-card">
+      <div class="chart-title">全港壓力指數</div>
+      <svg class="spark" viewBox="0 0 320 180" data-ct="ALL" aria-hidden="true">
+        <g class="grid"></g>
+        <g class="axis"></g>
+        <polyline class="line" points=""></polyline>
+        <g class="points"></g>
+        <text class="axis-label y"></text>
+        <text class="axis-label x"></text>
+      </svg>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">第一貨櫃中心</div>
+      <svg class="spark" viewBox="0 0 320 180" data-ct="CT1" aria-hidden="true">
+        <g class="grid"></g>
+        <g class="axis"></g>
+        <polyline class="line" points=""></polyline>
+        <g class="points"></g>
+        <text class="axis-label y"></text>
+        <text class="axis-label x"></text>
+      </svg>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">第二貨櫃中心</div>
+      <svg class="spark" viewBox="0 0 320 180" data-ct="CT2" aria-hidden="true">
+        <g class="grid"></g>
+        <g class="axis"></g>
+        <polyline class="line" points=""></polyline>
+        <g class="points"></g>
+        <text class="axis-label y"></text>
+        <text class="axis-label x"></text>
+      </svg>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">第三貨櫃中心</div>
+      <svg class="spark" viewBox="0 0 320 180" data-ct="CT3" aria-hidden="true">
+        <g class="grid"></g>
+        <g class="axis"></g>
+        <polyline class="line" points=""></polyline>
+        <g class="points"></g>
+        <text class="axis-label y"></text>
+        <text class="axis-label x"></text>
+      </svg>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">第四貨櫃中心</div>
+      <svg class="spark" viewBox="0 0 320 180" data-ct="CT4" aria-hidden="true">
+        <g class="grid"></g>
+        <g class="axis"></g>
+        <polyline class="line" points=""></polyline>
+        <g class="points"></g>
+        <text class="axis-label y"></text>
+        <text class="axis-label x"></text>
+      </svg>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">第五貨櫃中心</div>
+      <svg class="spark" viewBox="0 0 320 180" data-ct="CT5" aria-hidden="true">
+        <g class="grid"></g>
+        <g class="axis"></g>
+        <polyline class="line" points=""></polyline>
+        <g class="points"></g>
+        <text class="axis-label y"></text>
+        <text class="axis-label x"></text>
+      </svg>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">第六貨櫃中心</div>
+      <svg class="spark" viewBox="0 0 320 180" data-ct="CT6" aria-hidden="true">
+        <g class="grid"></g>
+        <g class="axis"></g>
+        <polyline class="line" points=""></polyline>
+        <g class="points"></g>
+        <text class="axis-label y"></text>
+        <text class="axis-label x"></text>
+      </svg>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">第七貨櫃中心</div>
+      <svg class="spark" viewBox="0 0 320 180" data-ct="CT7" aria-hidden="true">
+        <g class="grid"></g>
+        <g class="axis"></g>
+        <polyline class="line" points=""></polyline>
+        <g class="points"></g>
+        <text class="axis-label y"></text>
+        <text class="axis-label x"></text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- 右上：壓力圖例 + 區域圖例 + 時間控制 -->
+<div class="hud hud-tr">
+  <button id="hud-collapse" class="hud-collapse" aria-expanded="true" title="摺疊">›</button>
+  <div class="legend">
+    <span class="legend-cap">壓力</span>
+    <div class="legend-bar"></div>
+    <div class="legend-ticks"><span>低</span><span>高</span></div>
+  </div>
+  <div class="legend zonekey">
+    <span class="k k-ct"></span>貨櫃中心
+    <span class="k k-named"></span>自由貿易港區
+    <span class="k k-port"></span>港區
+  </div>
+  <div class="time-panel" id="time-panel">
+    <div class="time-head">
+      <div id="cur-date" class="date">—</div>
+      <div class="time-actions">
+        <button id="play" class="icon-btn" title="播放">▶</button>
+        <select id="speed" title="速度">
+          <option value="140">慢</option>
+          <option value="55" selected>中</option>
+          <option value="18">快</option>
+        </select>
+        <button id="reset-view" class="icon-btn" title="重設視角">⤢</button>
+      </div>
+    </div>
+    <div class="time-body">
+      <div class="time-row">
+        <span class="time-label">月</span>
+        <button class="step-btn" data-target="month" data-step="-1" title="上個月">‹</button>
+        <input type="range" id="month" min="0" max="11" value="5" step="1">
+        <button class="step-btn" data-target="month" data-step="1" title="下個月">›</button>
+        <div id="month-label" class="mini">6</div>
+      </div>
+      <div class="time-row">
+        <span class="time-label">日</span>
+        <button class="step-btn" data-target="day" data-step="-1" title="前一天">‹</button>
+        <input type="range" id="day" min="1" max="30" value="15" step="1">
+        <button class="step-btn" data-target="day" data-step="1" title="後一天">›</button>
+        <div id="day-label" class="mini">15</div>
+      </div>
+      <div class="time-row">
+        <span class="time-label">時</span>
+        <button class="step-btn" data-target="hour" data-step="-1" title="前一小時">‹</button>
+        <input type="range" id="hour" min="0" max="23" value="12" step="1">
+        <button class="step-btn" data-target="hour" data-step="1" title="後一小時">›</button>
+        <div id="hour-label" class="mini">12</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 浮動資料框（CT 懸浮，智能定位） -->
+<div id="tooltip" class="panel" hidden></div>
+<!-- 區名小標（其他港區 hover） -->
+<div id="nametag" class="nametag" hidden></div>
+<!-- 船舶詳情面板（點船觸發，與CT資料框並存） -->
+<div id="ship-panel" class="panel" hidden></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
